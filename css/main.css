@@ -95,56 +95,24 @@ header {
   grid-template-columns: repeat(3, 1fr);
   align-items: center; }
 
-.reloj {
-  font-size: 30px;
-  font-weight: 600;
-  color: blue;
-  border: 2px solid black; }
+.notificacion {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 1rem 3rem;
+  opacity: 0;
+  transition: opacity 0.5s ease; }
 
-footer {
-  margin-top: 20px;
-  padding: 30px;
-  background-color: black; }
+.visible {
+  opacity: 1; }
 
-#error {
-  padding-bottom: 10px;
-  margin-top: 20px;
-  display: inline-block;
-  font-size: 30px; }
+.exito {
+  background-color: #b3f175;
+  color: green; }
 
-.usuarios table {
-  margin: 40px 0 20px 0;
-  text-align: center;
-  width: 100%; }
-  .usuarios table th {
-    width: 50%;
-    border: 1px solid black; }
-.usuarios .datos_usuarios {
-  align-self: center;
-  text-align: center; }
-  .usuarios .datos_usuarios p:hover {
-    background-color: #e1e1e1; }
-
-.user {
-  width: 50%;
-  float: left;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); }
-
-.pass {
-  width: 50%;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); }
-
-.lista-perfiles table .tr_datos td {
-  border: 2px solid red;
-  padding: 20px; }
-
-.lista_registrados table .tr_datos td {
-  border: 2px solid red;
-  padding: 20px; }
+.error {
+  background-color: #ee94a6;
+  color: #a30021; }
 
 html {
   color: #222;
