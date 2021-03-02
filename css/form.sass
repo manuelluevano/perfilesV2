@@ -1,0 +1,89 @@
+//   CUSTOM PROPERTIES
+\:root
+    --primario: #c2185B
+    --secundario: #FFC107
+    
+main
+    form 
+        margin: 50px
+        padding: 20px 0
+        border-radius: 10px
+        label
+            font-family: 'Open Sans', sans-serif
+            font-weight: 400
+            font-size: 20px
+        input
+            padding: 10px
+            border-radius: 6px
+            border: 1px solid #e1e1e1
+        
+.btn-agregar
+    text-align: right
+
+.bg-rojo
+    background-color: var(--primario)
+
+.bg-amarillo
+    background-color: var(--secundario)
+
+
+.campos
+        margin: 0
+        display: grid
+        justify-content: space-between
+        grid-template-columns: 50% 50%
+        gap: 1rem
+        padding: 10px
+
+.campos2
+        margin: 0
+        display: grid
+        justify-content: space-between
+        grid-template-columns: 50% 50%
+        gap: 1rem
+        #pais
+            width: 50%
+            padding: 10px
+            border-radius: 6px
+            border: 1px solid #e1e1e1
+.sombra
+    -webkit-box-shadow: -1px 14px 36px -5px rgba(0,0,0,0.55)
+    -moz-box-shadow: -1px 14px 36px -5px rgba(0,0,0,0.55)
+    box-shadow: -1px 14px 36px -5px rgba(0,0,0,0.55)
+
+.contenedor-contactos
+    padding: 1rem 3rem
+    h2
+        color: var(--primario)
+    input
+        padding: 10px
+        width: 80%
+    p
+        margin-top: 40px
+        color: var(--primario)
+        font-size: 30px
+    .contenedor-tabla
+        overflow: scroll
+        .listado_perfiles
+            padding: 100px
+            thead
+                tr
+                    th
+                        background-color: var(--primario)
+                        padding: 10px
+                        color: #fff
+            tbody
+                tr
+                    td
+                        padding: 15px 0
+                    .acciones
+                        display: grid
+                        grid-template-columns: repeat(2, 1fr)
+                        a
+                            i
+                                font-size: 26px
+                                color: var(--secundario)
+                        button
+                            i
+                                font-size: 26px
+                                color: var(--primario)
