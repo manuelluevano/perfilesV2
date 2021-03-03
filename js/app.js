@@ -23,6 +23,7 @@ function leerFormulario(e){
           telefono = document.querySelector('#telefono').value,
           link_perfil_real = document.querySelector('#link-perfil-real').value,
           pais = document.querySelector('#pais').value;
+          accion = document.querySelector('#accion').value;
 
     //  Validar que los campos contengan información
 
@@ -32,11 +33,63 @@ function leerFormulario(e){
             //  Texto y clase 
             mostrarNotificaciones("Todos los campos son obligatorios", 'error');
         }else{
-            mostrarNotificaciones("Contacto creado correctamente", 'exito');
+
+            // Pasa la validación, se crea la llamda a Ajax
+            const infoContacto = new FormData(); //FormData es una forma de leer los datos de un formulario
+
+            //  Pasamos los datos
+            infoContacto.append('nombre', nombre),
+            infoContacto.append('email', email),
+            infoContacto.append('pass', pass),
+            infoContacto.append('date', date),
+            infoContacto.append('link_perfil', link_perfil),
+            infoContacto.append('telefono', telefono),
+            infoContacto.append('link_perfil_real', link_perfil_real),
+            infoContacto.append('pais', pais);
+
+            // Utilizamos (...) para crear una copia de FornData y poder visualizar la info desde console.log
+            console.log(...infoContacto);
+            
+            if(accion === 'crear'){
+                // Creamos un nuevo contacto
+                // Funcion para insertar los datos de FornData
+
+                insertarBD(infoContacto);
+            }else{
+                // Editar el contacto
+            }
+
+
     }
 
 
 }
+
+// Funcion insertar en la base de datos vía AJAX
+function insertarBD(infoContacto){
+    //  Llamada a ajax
+
+    //  Crear el objeto
+        const xhr = new XMLHttpRequest();
+
+    //  Abrie la conexion a ajax
+        xhr.open('POST', 'includes/modelos/modelo-contacto.php', true);
+    //  Pasar los datos a ajax
+        xhr.onload = function(){
+            if(this.status === 200 ){
+                 console.log(xhr.responseText);
+                 // En php no existe los arreglos asociativos, se llaman objetos
+                //Leemos la respuesta de php - primero convertimos el string Json en objeto para leer
+                const respuesta = JSON.parse(xhr.responseText);
+
+                console.log(respuesta.nombre);
+            }
+        }
+
+    //  Enviar los datos a ajax
+        xhr.send(infoContacto);
+}
+
 
 
 //Notifiación en pantalla

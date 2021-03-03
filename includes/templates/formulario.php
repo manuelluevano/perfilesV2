@@ -63,7 +63,10 @@
                       <option value="16">Venezuela</option>
                     </select>
                   </div>
-                  
+                  <div class="campo enviar">
+                    <input type="hidden" value="crear" id="accion">
+                     <input type="submit" value="Añadir" >
+                  </div>
               </div>
               <!-- Crear array para almacenar los valor de los inputs  -->
               

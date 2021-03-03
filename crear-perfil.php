@@ -9,9 +9,7 @@
 
     <legend>Añadir un perfil <span>Todos los campos son obligatorios</span> </legend>
     <?php include_once 'includes/templates/formulario.php' ?>
-              <div class="campo">
-                <input type="submit" class="btn btn-success" value="Crear">
-              </div>
+             
       
     </form>
       
@@ -52,8 +50,9 @@
                 <td>3312685530</td>
                 <td>https://www.facebook.com/adsafsa.gomez.5682</td>
                 <td>Argentina</td>
+                
                 <td class="acciones">
-                  <a href="" class="btn btn-editar">
+                  <a href="editar-perfil.php" class="btn btn-editar">
                     <i class="fas fa-pen-square"></i>
                   </a>
 
