@@ -5,12 +5,12 @@
 
 <h3>Editar perfil</h3>
 
-<form action="respuesta.php" method="post" action="#" class="bg-amarillo form sombra">
+    <form action="respuesta.php" method="post" action="#" class="bg-amarillo form sombra">
 
 
-<?php include_once 'includes/templates/formulario.php' ?>
-           
-</form>
+        <?php include_once 'includes/templates/formulario.php' ?>
+            
+    </form>
 
 <div id="error" class="error"> </div>
 

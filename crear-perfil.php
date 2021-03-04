@@ -7,14 +7,13 @@
     <form action="#" class="bg-amarillo form sombra" id="contacto">
     
 
-    <legend>Añadir un perfil <span>Todos los campos son obligatorios</span> </legend>
-    <?php include_once 'includes/templates/formulario.php' ?>
+      <legend>Añadir un perfil <span>Todos los campos son obligatorios</span> </legend>
+      <?php include_once 'includes/templates/formulario.php' ?>
              
-      
     </form>
       
       <div id="error" class="error"> 
-    </main>
+  </main>
 
     <div class="bg-blanco sombra form contenedor">
       <div class="contenedor-contactos">
@@ -52,7 +51,7 @@
                 <td>Argentina</td>
                 
                 <td class="acciones">
-                  <a href="editar-perfil.php" class="btn btn-editar">
+                  <a href="editar-perfil.php?id=1" class="btn btn-editar">
                     <i class="fas fa-pen-square"></i>
                   </a>
 

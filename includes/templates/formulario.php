@@ -11,7 +11,7 @@
               <input type="email" placeholder="Correo electronico" id="email" name="email">
             </div>
 
-            <div class="campo">
+            <!-- <div class="campo">
               <label for="pass">Ingresa la contraseña</label>
               <input type="password" name="" id="pass" placeholder="Contraseña" name="pass">
             </div>
@@ -62,12 +62,12 @@
                       <option value="15">Uruguay</option>
                       <option value="16">Venezuela</option>
                     </select>
-                  </div>
+                  </div>-->
                   <div class="campo enviar">
                     <input type="hidden" value="crear" id="accion">
                      <input type="submit" value="Añadir" >
                   </div>
-              </div>
+              </div> 
               <!-- Crear array para almacenar los valor de los inputs  -->
               
               
