@@ -1,4 +1,9 @@
-<?php include_once 'includes/templates/header.php' ?>
+<?php 
+      // Agregamos las funciones para obtener los perfiles creados de la base de datos y el header (diseño)
+      include_once 'includes/funciones/funciones.php'; 
+      include_once 'includes/templates/header.php';
+
+?>
 
   <main class=" bg-rojo">
 
@@ -40,26 +45,50 @@
             </thead>
 
             <tbody class="datos_perfiles">
-              <tr>
-                <td>Juan</td>
-                <td>a@gmail.com</td>
-                <td>235a456sd8654a</td>
-                <td>21/02/2021</td>
-                <td>https://www.facebook.com/joseadrian.gomez.5682</td>
-                <td>3312685530</td>
-                <td>https://www.facebook.com/adsafsa.gomez.5682</td>
-                <td>Argentina</td>
-                
-                <td class="acciones">
-                  <a href="editar-perfil.php?id=1" class="btn btn-editar">
-                    <i class="fas fa-pen-square"></i>
-                  </a>
+                  <?php 
+                  // mandamos llamar la funcion para traer los perfiles de la base de datos
+                      $contactos = obetenerContactosDesdeDB();
+                      // Ver información de la base de datos ->num_rows['']:  
+                        // var_dump($contactos);
 
-                  <button data-id="1" class="btn-borrar btn" type="button">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+
+                          // SI EXISTEN VALORES QUE SE EJECUTE, SI NO, NO REALICE NADA.
+                          if($contactos->num_rows){ 
+                            
+                              // Creamos un bucle para recorrer el array de la base de datos e imprimir todos los
+                                  //registros
+
+                                  foreach($contactos as $contacto){?>  
+
+                                      <tr>
+                                        <!-- PARA VER EL NOMBRE DE LOS CAMPOS Y ASÍ HACER LA PETICIÓN-->
+                                        <!-- <pre>
+                                          <?php //var_dump($contacto); ?>
+                                        </pre> 
+                                        <!-- CIERRE PARA VER NOMBRES DE LOS CAMPOS -->
+
+                                        <td><?php echo $contacto['nombre']; ?></td>
+                                        <td><?php echo $contacto['email']; ?></td>
+                                        <td><?php echo $contacto['contrasena']; ?></td>
+                                        <td><?php echo $contacto['fecha']; ?></td>
+                                        <td><?php echo $contacto['link_perfil']; ?></td>
+                                        <td><?php echo $contacto['telefono']; ?></td>
+                                        <td><?php echo $contacto['link_perfil_real']; ?></td>
+                                        <td><?php echo $contacto['pais']; ?></td>
+                                        
+                                        <td class="acciones">
+                                          <a href="editar-perfil.php?id=<?php echo $contacto['perfil_id']; ?>" class="btn btn-editar">
+                                            <i class="fas fa-pen-square"></i>
+                                          </a>
+
+                                          <button data-id="<?php echo $contacto['perfil_id']; ?>" class="btn-borrar btn" type="button">
+                                            <i class="fas fa-trash"></i>
+                                          </button>
+                                        </td>
+                                      </tr>
+
+                                <?php } //<!-- CIERRE BUCLE -->
+                           } ?>       <!-- CIERRE CONDICIONAL IF -->
             </tbody>
 
           </table>

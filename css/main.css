@@ -69,15 +69,13 @@ main form {
     color: var(--primario);
     font-size: 30px; }
   .contenedor-contactos .contenedor-tabla {
-    overflow: scroll; }
-    .contenedor-contactos .contenedor-tabla .listado_perfiles {
-      padding: 100px; }
-      .contenedor-contactos .contenedor-tabla .listado_perfiles thead tr th {
-        background-color: var(--primario);
-        padding: 10px;
-        color: #fff; }
-      .contenedor-contactos .contenedor-tabla .listado_perfiles tbody tr td {
-        padding: 15px 0; }
+    overflow: scroll;
+    display: grid; }
+
+thead tr th {
+  font-size: 19px;
+  color: #fff;
+  background-color: var(--primario); }
 
 .acciones {
   display: grid;
