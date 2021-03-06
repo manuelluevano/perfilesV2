@@ -24,7 +24,7 @@
             <p class="total_perfiles">Total perfiles  <span>2</span></p>        
 
         <div class="contenedor-tabla">
-          <table class="listado_perfiles">
+          <table id="listado_perfiles">
             <thead>
               <tr>
                 <th>Nombre: </th>

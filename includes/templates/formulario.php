@@ -11,9 +11,9 @@
               <input type="email" placeholder="Correo electronico" id="email" name="email">
             </div>
 
-            <!-- <div class="campo">
+            <div class="campo">
               <label for="pass">Ingresa la contraseña</label>
-              <input type="password" name="" id="pass" placeholder="Contraseña" name="pass">
+              <input type="text" name="" id="pass" placeholder="Contraseña" name="pass">
             </div>
 
             <div class="campo">
@@ -29,7 +29,7 @@
 
             <div class="campo">
               <label for="numero">Número teléfonico</label>
-              <input type="tel" placeholder="Número" id="telefono" name="numero">
+              <input type="text" placeholder="Número" id="telefono" name="numero">
             </div>
           </div>
 
@@ -62,7 +62,7 @@
                       <option value="15">Uruguay</option>
                       <option value="16">Venezuela</option>
                     </select>
-                  </div>-->
+                  </div>  
                   <div class="campo enviar">
                     <input type="hidden" value="crear" id="accion">
                      <input type="submit" value="Añadir" >

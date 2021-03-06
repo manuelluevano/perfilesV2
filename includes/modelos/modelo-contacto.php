@@ -8,10 +8,17 @@ if($_POST['accion'] == 'crear'){
      // Validar las entradas
      $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_STRING);
      $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+     $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
+     $date = filter_var($_POST['date'], FILTER_SANITIZE_STRING);
+     $link_perfil = filter_var($_POST['link_perfil'], FILTER_SANITIZE_STRING);
+     $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_NUMBER_INT);
+     $link_perfil_real = filter_var($_POST['link_perfil_real'], FILTER_SANITIZE_STRING);
+     $pais = filter_var($_POST['pais'], FILTER_SANITIZE_STRING);
 
      try {
-          $stmt = $conn->prepare("INSERT INTO crear_perfil (nombre, email) VALUES (?, ?)");
-          $stmt->bind_param("ss", $nombre, $email);
+          $stmt = $conn->prepare("INSERT INTO crear_perfil (nombre, email, contrasena, fecha, link_perfil, telefono,
+           link_perfil_real, pais) VALUES (?,?,?,?,?,?,?,?)");
+          $stmt->bind_param("sssssiss", $nombre, $email, $pass, $date, $link_perfil, $telefono, $link_perfil_real, $pais);
           $stmt->execute();
           if($stmt->affected_rows == 1) {
                $respuesta = array(
@@ -19,6 +26,12 @@ if($_POST['accion'] == 'crear'){
                     'infoContacto' => array(
                          'nombre' => $nombre,
                          'email' => $email,
+                         'pass' => $pass,
+                         'date' => $date,
+                         'link_perfil' => $link_perfil,
+                         'telefono' => $telefono,
+                         'link_perfil_real' => $link_perfil_real,
+                         'pais' => $pais,
                          'id_insertado' => $stmt->insert_id
                     )
                );

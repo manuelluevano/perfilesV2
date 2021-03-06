@@ -78,15 +78,16 @@ main form {
         color: #fff; }
       .contenedor-contactos .contenedor-tabla .listado_perfiles tbody tr td {
         padding: 15px 0; }
-      .contenedor-contactos .contenedor-tabla .listado_perfiles tbody tr .acciones {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); }
-        .contenedor-contactos .contenedor-tabla .listado_perfiles tbody tr .acciones a i {
-          font-size: 26px;
-          color: var(--secundario); }
-        .contenedor-contactos .contenedor-tabla .listado_perfiles tbody tr .acciones button i {
-          font-size: 26px;
-          color: var(--primario); }
+
+.acciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); }
+  .acciones a i {
+    font-size: 26px;
+    color: var(--secundario); }
+  .acciones button i {
+    font-size: 26px;
+    color: var(--primario); }
 
 header {
   margin: 20px 0 50px;

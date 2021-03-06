@@ -1,4 +1,6 @@
-const formularioContactos = document.querySelector('#contacto');
+const formularioContactos = document.querySelector('#contacto'),
+      listadoPerfiles = document.querySelector('#listado_perfiles tbody');
+
 
 eventListeners();
 
@@ -14,9 +16,16 @@ function leerFormulario(e) {
      // Leer los datos de los inputs
      const nombre = document.querySelector('#nombre').value,
            email = document.querySelector('#email').value,
-           accion = document.querySelector('#accion').value;
+           accion = document.querySelector('#accion').value,
+           pass = document.querySelector('#pass').value,
+           date = document.querySelector('#date').value,
+           link_perfil = document.querySelector('#link-perfil').value,
+           telefono = document.querySelector('#telefono').value,
+           link_perfil_real = document.querySelector('#link-perfil-real').value,
+           pais = document.querySelector('#pais').value;
 
-     if(nombre === '' || email  === '') {
+     if(nombre === '' || email  === '' || pass === '' || date === '' || link_perfil === '' || telefono === '' ||
+     link_perfil_real === '' || pais === '') {
           // 2 parametros: texto y clase
           mostrarNotificaciones('Todos los Campos son Obligatorios', 'error');
      } else {
@@ -24,6 +33,12 @@ function leerFormulario(e) {
           const infoContacto = new FormData();
                 infoContacto.append('nombre', nombre);
                 infoContacto.append('email', email);
+                infoContacto.append('pass', pass);
+                infoContacto.append('date', date);
+                infoContacto.append('link_perfil', link_perfil);
+                infoContacto.append('telefono', telefono);
+                infoContacto.append('link_perfil_real', link_perfil_real);
+                infoContacto.append('pais', pais);
                 infoContacto.append('accion', accion);
 
           //console.log(...infoContacto);
@@ -56,6 +71,69 @@ function insertarBD(infoContacto){
                 const respuesta = JSON.parse( xhr.responseText );
 
                 //console.log(respuesta.nombre);
+
+                // INSERTA UN NUEVO ELEMENTO A LA TABLA 
+                const nuevoContacto = document.createElement('tr');
+                
+                nuevoContacto.innerHTML = `
+
+                    <td>${respuesta.infoContacto.nombre}</td>
+                    <td>${respuesta.infoContacto.email}</td>
+                    <td>${respuesta.infoContacto.pass}</td>
+                    <td>${respuesta.infoContacto.date}</td>
+                    <td>${respuesta.infoContacto.link_perfil}</td>
+                    <td>${respuesta.infoContacto.telefono}</td>
+                    <td>${respuesta.infoContacto.link_perfil_real}</td>
+                    <td>${respuesta.infoContacto.pais}</td>
+                `;
+
+
+                // Crea el contenedor para los botones
+                const contenedorAcciones = document.createElement('td');
+                      contenedorAcciones.classList.add('acciones');
+
+                    // Creacion del icono de editar
+                    const iconoEditar = document.createElement('i'); 
+                          iconoEditar.classList.add('fas', 'fa-pen-square');
+
+                    // Crear el enlace para editar
+                    const btnEditar = document.createElement('a');
+                    btnEditar.appendChild(iconoEditar);
+                    btnEditar.href = `editar-perfil.php=${respuesta.infoContacto.id_insertado}`;
+                    btnEditar.classList.add('btn', 'btn-editar');
+
+                    //  Lo agregamos al padre
+                    contenedorAcciones.appendChild(btnEditar);
+
+                /***////////*/*////*///*//*//*///*///////// */ */ */
+
+                // Crear el icono de eliminar 
+                     const iconoEliminar = document.createElement('i');
+                           iconoEliminar.classList.add('fas', 'fa-trash');
+                    
+                //  Crear el enlace para editar
+                     const btnEliminar = document.createElement('button');
+                     btnEliminar.appendChild(iconoEliminar);
+                     btnEliminar.setAttribute('data-id', respuesta.infoContacto.id_insertado);
+                     btnEliminar.classList.add('btn', 'btn-borrar');
+
+                //   Lo agregamos al padre
+                 contenedorAcciones.appendChild(btnEliminar);
+
+                // Agregarlo al tr para mostrarlo en la página
+                nuevoContacto.appendChild(contenedorAcciones);
+
+
+
+                /* Agregamos a la lista de perfiles que se muestra en pantalla  */
+                listadoPerfiles.appendChild(nuevoContacto);
+
+                /* RESETEAR EL FORMULARIO DESPUÉS DE AGREGAR LA INFO  */
+                document.querySelector('form').reset();
+
+
+                /* MOSTRAR LA NOTIFICACIÓN AL AGREGAR UN PERFIL NUEVO */ 
+                mostrarNotificaciones('Perfil creado correctamente', 'exito');
             }
         }
 
