@@ -5,11 +5,17 @@ const formularioContactos = document.querySelector('#contacto'),
 eventListeners();
 
 function eventListeners() {
-     // Cuando el formulario de crear o editar se ejecuta
-     formularioContactos.addEventListener('submit', leerFormulario);
 
-     //Listener para elminar al precionar el boton
-     listadoPerfiles.addEventListener('click', eliminarFormulario);
+    // Si existe o el programa pide la funcion ejecutar, si no no
+     if(formularioContactos){
+        // Cuando el formulario de crear o editar se ejecuta
+        formularioContactos.addEventListener('submit', leerFormulario);
+    }
+     // Si existe o el programa pide la funcion ejecutar, si no no
+     if(listadoPerfiles){
+         //Listener para elminar al precionar el boton
+         listadoPerfiles.addEventListener('click', eliminarFormulario);
+     }
 
 }
 
@@ -150,17 +156,19 @@ function eliminarFormulario(e){
     // Para ver por consola el elemento al cual le diste click
                         //ParentElement,para seleccionar el padre del elemento y verificar si existe
                         // Devolverá true si existe, false si no 
-    console.log(e.target.parentElement.classList.contains('btn-borrar'));
+    //console.log(e.target.parentElement.classList.contains('btn-borrar'));
 
     // Tomar el id 
-    const id = e.target.parentElement.getAttribute('data-id');
+    
+    if(e.target.parentElement.classList.contains('btn-borrar') ){
+        //Tomar id
+        const id = e.target.parentElement.getAttribute('data-id');
+        console.log(id);
 
-    console.log(id);
+        // Preguntar al usuario
+        const respuesta = confirm('Estas segur@ ?');
 
-    // Preguntar al usuario
-    const respuesta = confirm('Estas segur@ ?');
-
-    if(respuesta){
+        if(respuesta){
         console.log('Sí, estoy seguro');
     
         // console.log('Lo pensaré');
@@ -212,6 +220,11 @@ function eliminarFormulario(e){
 
     }
 
+    }
+
+    
+
+    
 }
 
 
