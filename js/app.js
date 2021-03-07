@@ -6,7 +6,7 @@ eventListeners();
 
 function eventListeners() {
 
-    // Si existe o el programa pide la funcion ejecutar, si no no
+    // Si existe o el programa pide la funcion, ejecutar, si no no
      if(formularioContactos){
         // Cuando el formulario de crear o editar se ejecuta
         formularioContactos.addEventListener('submit', leerFormulario);
