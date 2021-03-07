@@ -8,6 +8,9 @@ function eventListeners() {
      // Cuando el formulario de crear o editar se ejecuta
      formularioContactos.addEventListener('submit', leerFormulario);
 
+     //Listener para elminar al precionar el boton
+     listadoPerfiles.addEventListener('click', eliminarFormulario);
+
 }
 
 function leerFormulario(e) {
@@ -141,6 +144,75 @@ function insertarBD(infoContacto){
         xhr.send(infoContacto);
 }
 
+
+// Función eliminar contacto
+function eliminarFormulario(e){
+    // Para ver por consola el elemento al cual le diste click
+                        //ParentElement,para seleccionar el padre del elemento y verificar si existe
+                        // Devolverá true si existe, false si no 
+    console.log(e.target.parentElement.classList.contains('btn-borrar'));
+
+    // Tomar el id 
+    const id = e.target.parentElement.getAttribute('data-id');
+
+    console.log(id);
+
+    // Preguntar al usuario
+    const respuesta = confirm('Estas segur@ ?');
+
+    if(respuesta){
+        console.log('Sí, estoy seguro');
+    
+        // console.log('Lo pensaré');
+
+        // Llamado a ajax
+
+        //Crear el objeto
+        const xhr = new XMLHttpRequest();
+
+        //abrir la conexion  | |  mandaremos la información por GET
+        xhr.open('GET', `includes/modelos/modelo-contacto.php?id=${id}&accion=borrar`, true);
+
+        //leer la informacion
+        xhr.onload = function()  {  
+            if(this.status === 200){
+                const resultado = JSON.parse(xhr.responseText);
+
+                // console.log(resultado);
+
+                if(resultado.respuesta === 'correcto'){
+
+                    // Eliminamos el registro del DOM -> ajax
+
+                    //Vemos el elemento seleccionado
+                    console.log(e.target.parentElement.parentElement.parentElement);
+
+                    //Eliminamos el registro
+                    const deleteRegistro = e.target.parentElement.parentElement.parentElement;
+
+                    deleteRegistro.remove();
+
+                    // Mostramos una notificación, si algo esta bien
+                    mostrarNotificaciones('Contacto Eliminado', 'exito');
+
+
+                }else{
+
+                    // Mostramos una notificación, si algo esta mal
+
+                    mostrarNotificaciones('Hubo un error', 'error');
+                }
+
+
+            }
+        }
+
+        //enviar la petición
+        xhr.send();
+
+    }
+
+}
 
 
 //Notifiación en pantalla
