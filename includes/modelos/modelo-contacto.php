@@ -78,6 +78,58 @@ if($_GET['accion'] == 'borrar'){
      }
 
      echo json_encode($respuesta); 
+ 
+}
+
+if($_POST['accion'] == 'editar'){
+
+     // abrir conexion para acceder al elemento y elminarlo
+     
+     require_once('../funciones/bd_conexion.php');
+
+     
+      // Validar las entradas
+     $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_STRING);
+     $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+     $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
+     $date = filter_var($_POST['date'], FILTER_SANITIZE_STRING);
+     $link_perfil = filter_var($_POST['link_perfil'], FILTER_SANITIZE_STRING);
+     $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_NUMBER_INT);
+     $link_perfil_real = filter_var($_POST['link_perfil_real'], FILTER_SANITIZE_STRING);
+     $pais = filter_var($_POST['pais'], FILTER_SANITIZE_STRING);
+ 
+     // Validamos que el id que vamos a recibir sea entero
+     $idd = filter_var($_POST['perfil_id'], FILTER_SANITIZE_NUMBER_INT);
+
+     try{
+          // Vamos a reemplazar todos los valores par poder realizar el update
+          //                                            nombre = ? || esto es iguaql que nombre = placeholder del input
+          $stmt = $conn->prepare("UPDATE crear_perfil SET nombre = ?, email = ?, contrasena = ?, fecha = ?, link_perfil = ?, 
+          telefono = ?, link_perfil_real = ?, pais = ? WHERE perfil_id = ?");
+
+          $stmt->bind_param("sssssissi", $nombre, $email, $pass, $date, 
+          $link_perfil, $telefono, $link_perfil_real, $pais, $idd);
+          $stmt->execute();
+          
+          if($stmt->affected_rows == 1){
+               $respuesta = array(
+                    'respuesta' => 'correcto'
+               );
+            }else{
+               $respuesta = array(
+                    'respuesta' => 'error'
+               );
+            }
+
+          $stmt->close();
+          $conn->close();
+
+     }catch(Exception $e) {
+          $respuesta = array(
+               'error catch' => $e->getMessage()
+          );
+     }
+     echo json_encode($respuesta);
 
 }
 

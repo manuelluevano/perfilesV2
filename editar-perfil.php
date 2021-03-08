@@ -9,7 +9,7 @@
     // convertimos el 'id' string a int y guardamos en variable -> solo se puede si el string es número
     $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
 
-    var_dump($id);
+    // var_dump($id);
     
     // Si no hay id, arrojará error
     if(!$id){
@@ -24,16 +24,16 @@
 
 ?>
 
-<pre>
-    <?php var_dump($contacto); ?>
-</pre>
+ <pre>
+    <?php var_dump($contacto['fecha']); ?>
+</pre> 
 
 
 <main class=" bg-rojo">
 
 <h3>Editar perfil</h3>
 
-    <form action="respuesta.php" method="post" action="#" class="bg-amarillo form sombra">
+    <form action="#" class="bg-amarillo form sombra" id="contacto">
 
 
         <?php include_once 'includes/templates/formulario.php' ?>

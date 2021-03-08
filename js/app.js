@@ -6,11 +6,9 @@ eventListeners();
 
 function eventListeners() {
 
-    // Si existe o el programa pide la funcion, ejecutar, si no no
-     if(formularioContactos){
         // Cuando el formulario de crear o editar se ejecuta
         formularioContactos.addEventListener('submit', leerFormulario);
-    }
+    
      // Si existe o el programa pide la funcion ejecutar, si no no
      if(listadoPerfiles){
          //Listener para elminar al precionar el boton
@@ -55,11 +53,18 @@ function leerFormulario(e) {
           if(accion === 'crear'){
                // crearemos un nuevo contacto
                insertarBD(infoContacto);
+
           } else {
-               // editar el contacto
-          }
+            // editar el contacto
+            // leer el Id
+            const idRegistro = document.querySelector('#id').value;
+            infoContacto.append('perfil_id', idRegistro);
+            actualizarRegistro(infoContacto);
+       }
      }
 }
+
+
 
 // Funcion insertar en la base de datos vía AJAX
 function insertarBD(infoContacto){
@@ -150,7 +155,39 @@ function insertarBD(infoContacto){
         xhr.send(infoContacto);
 }
 
+// actualizar registro
+function actualizarRegistro(infoContacto){
+    // console.log(...infoContacto);
 
+    // Crear objeto ajax
+    const xhr = new XMLHttpRequest();
+    
+    // abrir la conexion
+    xhr.open('POST', 'includes/modelos/modelo-contacto.php', true);
+
+    //leer la respuesta
+    xhr.onload = function()  {  
+        if(this.status === 200){
+            const resultado = JSON.parse(xhr.responseText);
+
+             if(resultado.respuesta === 'correcto'){
+                // Mostar noptificación si es correcto
+                mostrarNotificaciones('Contacto creado correctamente', 'exito');
+
+             }else{
+                // Mostar noptificación si NO es correcto
+                mostrarNotificaciones('Hubo un error', 'error');
+             }
+
+             // Después de 3 segundos redireccionar a la página de inicio
+             setTimeout(() => {
+                 window.location.href = 'index.php';
+             }, 4000);
+        }
+    }
+    //enviar la peticion
+    xhr.send(infoContacto);
+}
 // Función eliminar contacto
 function eliminarFormulario(e){
     // Para ver por consola el elemento al cual le diste click

@@ -12,7 +12,7 @@
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil
                             echo ($contacto['nombre']) ? $contacto['nombre'] : '';
-                      ?> "
+                      ?>"
                 >
             </div>
 
@@ -23,7 +23,7 @@
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil
                             echo ($contacto['email']) ? $contacto['email'] : '';
-                      ?> "
+                      ?>"
               >
             </div>
 
@@ -34,24 +34,20 @@
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil
                             echo ($contacto['contrasena']) ? $contacto['contrasena'] : '';
-                      ?> "       
+                      ?>"       
               >
             </div>
 
             <div class="campo">
               <label for="date">Ingresa la fecha de creación</label>
 
-              <?php if($contacto['fecha']){?>
-                <input 
-                value="<?php echo $contacto['fecha']
-                  ?>" 
-                >
-              <?php } else{ ?>
-
-                <input type="date" id="date" name="trip-start" value="01-01-2020" 
+              <input type="date" id="date" name="trip-start" value="<?php //Vamos a crear un condicional ternario para rellenar si se va editar o dejar en blanco
+                            // si se va a crear usuarion -> de esa forma reutilizamos el formulario
+                                  // $contacto -> fetch_assoc() de pagina de editar_perifil
+                            echo ($contacto['fecha']) ? $contacto['fecha'] : '01-01-2020';
+                      ?>" 
                 min="01-01-2020" max="2022-12-30" id="fecha" name="date">
-              
-              <?php }?>
+        
             </div>
 
             <div class="campo">
@@ -61,7 +57,7 @@
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil
                             echo ($contacto['link_perfil']) ? $contacto['link_perfil'] : '';
-                      ?> " 
+                      ?>" 
               >
             </div>
 
@@ -72,7 +68,7 @@
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil
                             echo ($contacto['telefono']) ? $contacto['telefono'] : '';
-                      ?> " 
+                      ?>" 
               >
             </div>
           </div>
@@ -88,7 +84,7 @@
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil
                             echo ($contacto['link_perfil_real']) ? $contacto['link_perfil_real'] : '';
-                      ?> " 
+                      ?>" 
                     >
                   </div>
 
@@ -119,18 +115,18 @@
                       $textoBtn = ($contacto['nombre']) ? 'Guardar' : 'Añadir';
 
                       // Funcion para crear o editar registro
-                      $accion = ($contacto['nombre']) ? 'editar' : 'crear';
-                    ?>
+                      $accion = ($contacto['telefono']) ? 'editar' : 'crear';
+                      ?>
 
-                    <input type="hidden" value="<?php echo $accion ?>" id="accion">
+                    <input type="hidden" id="accion" value="<?php echo $accion; ?>" >
                       <!-- TRAER EL ID PARA EDITAR LOS CAMPOS-->
 
                     <?php if(isset($contacto['perfil_id']) ) { ?>
-                      <input type="hidden" id="pefil_id" value="<?php echo $contacto['perfil_id']; ?>">
+                      <input type="hidden" id="id" value="<?php echo $contacto['perfil_id']; ?>">
                     <?php } ?>
 
 
-                    <input type="submit" value=" <?php echo $textoBtn ?> " >
+                    <input type="submit" value="<?php echo $textoBtn; ?>" >
                   </div>
               </div> 
               <!-- Crear array para almacenar los valor de los inputs  -->
