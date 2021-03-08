@@ -29,7 +29,7 @@
 
             <div class="campo">
               <label for="pass">Ingresa la contraseña</label>
-              <input type="text" name="" id="pass"  name="pass"
+              <input type="text" name="" id="pass" placeholder="Contraseña" name="pass"
                     value="<?php //Vamos a crear un condicional ternario para rellenar si se va editar o dejar en blanco
                             // si se va a crear usuarion -> de esa forma reutilizamos el formulario
                                   // $contacto -> fetch_assoc() de pagina de editar_perifil

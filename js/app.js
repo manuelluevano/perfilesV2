@@ -1,5 +1,6 @@
 const formularioContactos = document.querySelector('#contacto'),
-      listadoPerfiles = document.querySelector('#listado_perfiles tbody');
+      listadoPerfiles = document.querySelector('#listado_perfiles tbody'),
+      inputBuscador = document.querySelector('#buscar');
 
 
 eventListeners();
@@ -14,6 +15,12 @@ function eventListeners() {
          //Listener para elminar al precionar el boton
          listadoPerfiles.addEventListener('click', eliminarFormulario);
      }
+
+     // Buscador de perfiles 
+     inputBuscador.addEventListener('input', buscarContactos);
+
+     // Contador de contactos
+     numeroContactos();
 
 }
 
@@ -148,6 +155,9 @@ function insertarBD(infoContacto){
 
                 /* MOSTRAR LA NOTIFICACIÓN AL AGREGAR UN PERFIL NUEVO */ 
                 mostrarNotificaciones('Perfil creado correctamente', 'exito');
+
+                // Actualizar contador de perfiles
+                numeroContactos();
             }
         }
 
@@ -176,7 +186,7 @@ function actualizarRegistro(infoContacto){
 
              }else{
                 // Mostar noptificación si NO es correcto
-                mostrarNotificaciones('Hubo un error', 'error');
+                mostrarNotificaciones('No editaste ningun dato', 'error');
              }
 
              // Después de 3 segundos redireccionar a la página de inicio
@@ -291,4 +301,52 @@ function mostrarNotificaciones(mensaje, clase){
         }, 3000)
     }, 100);
 
+}
+
+// Buscador de contactos
+
+function buscarContactos(e){
+    // De esta forma por consola pasamos lo que vamos escribiendo en el input, ignoramos mayusculas y minusculas con "i"
+    // console.log(e.target.value);
+
+    const expresion = new RegExp(e.target.value, "i");
+            registro = document.querySelectorAll('tbody tr');
+
+            // Ocultamos los registros
+            registro.forEach(registro => {
+                registro.style.display = 'none';
+                // console.log(registro.childNodes[5]);
+
+                // Childnodes[]- buscamos el hijo donde se aloje la informacion que necesitamos
+                // replace() - para tomar en cuenta los espacios en blanco para 2 nombres  
+                if(registro.childNodes[5].textContent.replace(/\s/g, " ").search(expresion) != -1){
+                    // table-row - ya que se trata de una tabla y se acomoda correctamente
+                    //- block en elementos distintos a tablas
+                    registro.style.display = 'table-row';
+                }
+                // Mandamos llamar la funcion para actualizar el buscador
+                numeroContactos();
+            })
+
+}
+
+
+// Muestra el número de registros al buscador
+function numeroContactos(){
+    const totalContactos = document.querySelectorAll('tbody tr'),
+    //Guardamos la ubicación donde se mostrará
+          contenedorNumero = document.querySelector('.total_perfiles span');
+    // console.log(totalContactos.length);
+
+    let total = 0;
+
+    totalContactos.forEach(contacto=> {
+        if(contacto.style.display === '' || contacto.style.display === 'table-row'){
+            total++;
+        }
+    });
+
+    // console.log(total);
+
+    contenedorNumero.textContent = total;
 }
